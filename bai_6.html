@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Examples</title>
+    <style>
+        #p1 {
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+
+        .dynamicDiv {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #c0c0c0;
+            background-color: #e1e1e1;
+            font-size: 11px;
+            font-family: verdana;
+            color: #000;
+            padding: 5px;
+        }
+    </style>
+    <script>
+        function domloaded() {
+            console.log('Dom is loaded');
+            var div1 = document.getElementById('container1');
+            div1.innerHTML += '<p>Paragraph 3 the URL is ' + document.URL + '</p>';
+            var title = window.document.getElementById('title');
+            title.innerText += 'Cool!';
+            var divs = document.body.getElementsByTagName('div');
+            for (var i in divs) {
+                divs[i].innerHTML += '<p>Another Paragraph</p>';
+            }
+        }
+
+        function evaluateForm() {
+            var input = document.getElementById('info');
+            var result = document.getElementById('result-form');
+            if (input.value == 42) {
+                result.innerHTML = 'Correct Answer';
+            } else {
+                result.innerHTML = 'Wrong Answer';
+            }
+        }
+
+        function evaluateClick() {
+            evaluateForm();
+            var result = document.getElementById('result-form');
+            result.innerHTML = 'You submitted the: ' + result.innerHTML;
+        }
+
+        function hint() {
+            var input = document.getElementById('info');
+            input.value = 'Guess what the magic number is ... ';
+        }
+
+        function createDiv() {
+            var divTag = document.createElement("div");
+            divTag.id = "div1";
+            divTag.setAttribute("align", "center");
+            divTag.style.margin = "Opx auto";
+            divTag.className = "dynamicDiv";
+            divTag.innerHTML = "This HTML Div tag created using Javascript DOM dynamically.";
+            document.body.appendChild(divTag);
+        }
+
+        function changeBackgroundColor() {
+            document.body.style.backgroundColor = 'lavender';
+        }
+
+        function changeStyle() {
+            document.getElementById("p1").style.color = "blue";
+            document.getElementById("p1").style.fontFamily = "Arial";
+        }
+    </script>
+</head>
+
+<body onload="domloaded();">
+    <h1>Phần 1</h1>
+    <div id="container1">
+        <h2>Heading 1</h2>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </div>
+
+    <h1>Phần 2</h1>
+    <div id="input-form">
+        <label for="info">Enter information here:</label>
+        <input name="info" id="info" type="text" onkeyup="evaluateForm();" />
+        <button onclick="evaluateClick();">Submit</button>
+        <button onclick="hint();">Hint</button>
+    </div>
+    <div id="result-form"></div>
+
+    <h1>Phần 3</h1>
+    <p align="center">
+        <b>Click this button to create a div element dynamically:</b>
+        <input id="btn1" type="button" value="Create Div" onclick="createDiv();" />
+    </p>
+
+    <h1>Phần 4</h1>
+    <input type="button" onClick="changeBackgroundColor();" value="Change Background Color" />
+
+    <h1>Phần 5</h1>
+    <p id="p1">Hello world!</p>
+    <input type="button" onClick="changeStyle();" value="Change Style" />
+</body>
+
+</html>
